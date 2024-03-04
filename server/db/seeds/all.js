@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 
 export async function seed(knex) {
   faker.seed(123)
-  // Deletes ALL existing entries
+  //Deletes ALL existing entries
   await knex('luggage').del()
   await knex('tickets').del()
   await knex('airplanes').del()
@@ -50,7 +50,7 @@ export async function seed(knex) {
         departure_time: departureTime,
         arrival_time: arrival_time,
         flight_number: faker.airline.flightNumber(),
-        data: faker.date(1),
+        date: faker.date.recent(),
         seat: seatNumber + faker.helpers.arrayElement(seatLeather),
       }
     })
@@ -79,7 +79,7 @@ async function insertAirports(knex) {
   const airports = Array.from({ length: 12 }).map((_, i) => ({
     id: i + 1,
     name: faker.airline.airport().name,
-    phone: faker.phone.number('+## ### ### ####'),
+    phone: faker.string.numeric('+## ### ### ####'),
     email: `support@${faker.airline.airport().name.replace(/\s/g, '')}.com`,
   }))
 
@@ -93,7 +93,7 @@ async function insertPassengers(knex, dobs) {
     dob: user,
     fullname: faker.person.fullName(),
     job_title: faker.person.jobTitle(),
-    phone: faker.phone.number('+## ### ### ####'),
+    phone: faker.string.numeric('+## ### ### ####'),
   }))
 
   await knex('passengers').insert(passengers)
