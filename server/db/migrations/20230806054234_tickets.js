@@ -8,6 +8,8 @@ export function up(knex) {
     table.integer('arrival_airport_id').references('airports.id')
     table.string('departure_time')
     table.string('arrival_time')
+    table.string('date')
+    table.string('seat')
   })
 }
 

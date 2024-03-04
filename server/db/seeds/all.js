@@ -38,6 +38,8 @@ export async function seed(knex) {
       const arrival_time =
         departureTime.getTime() +
         1000 * 60 * 60 * faker.number.int({ min: 1, max: 10 })
+      const seatLeather = ['A', 'B', 'C', 'D', 'E']
+      const seatNumber = faker.number.int({ min: 1, max: 60 })
 
       return {
         id: i * 10 + j + 1,
@@ -48,6 +50,8 @@ export async function seed(knex) {
         departure_time: departureTime,
         arrival_time: arrival_time,
         flight_number: faker.airline.flightNumber(),
+        data: faker.date(1),
+        seat: seatNumber + faker.helpers.arrayElement(seatLeather),
       }
     })
   })
